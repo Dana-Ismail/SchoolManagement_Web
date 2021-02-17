@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html>
 <link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
 
 <body>
     <div class="container">
+        <h2>Inesrt Here!</h2>
         <form>
             <!-- student name -->
             <div class="from-control">
@@ -21,7 +24,7 @@
 
             <!-- student gpa -->
             <div class="from-control">
-                <label for="gpa">Student gpa</label>
+                <label for="gpa">Student GPA</label>
                 <input type="number" id="gpa" placeholder="4" />
             </div>
             <!-- student gpa -->
@@ -32,16 +35,18 @@
 
         </form>
     </div>
-    <div class="tbl">
-        <table style="width:100%">
-            <caption style='margin:5% 0 3% 0'>Students' List</caption>
-            <tr>
-                <th>Name</th>
-                <th>ID</th>
-                <th>GPA</th>
-            </tr>
-        </table>
-    </div>
+
+    <table style="width:65%" id="tbl">
+        <caption style='margin:5% 0 3% 0; font-size: 14px !important;'>
+            <h2> Students' List</h2>
+        </caption>
+        <tr>
+            <th>Name</th>
+            <th>ID</th>
+            <th>GPA</th>
+            </hr>
+        </tr>
+    </table>
     <div id="d"> </div>
     <script src="./source.js"></script>
 </body>
