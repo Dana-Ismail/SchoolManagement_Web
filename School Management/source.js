@@ -33,9 +33,10 @@ document.getElementById('delete').addEventListener('click', (e) => {
     inputValidation(nameInputEl.value, idInputEl.value, gpaInputEl.value);
     for (let i = 0, L = students.length; i < L; i++) {
         if (students[i].name == nameInputEl.value && students[i].id == idInputEl.value && students[i].gpa == gpaInputEl.value) {
+            students.splice(i, 1);
             showMessage2('success');
             /*  DeleteRow(nameInputEl.value, idInputEl.value, gpaInputEl.value); */
-            students.splice(i, 1);
+
         }
     }
 
@@ -67,10 +68,19 @@ document.getElementById('update').addEventListener('click', (e) => {
             students[i].name = document.getElementById('name');
             students[i].id = document.getElementById('idNumber');
             students[i].gpa = document.getElementById('gpa');
+            var row = table.rows[i];
+            var sname = row.cells[0];
+            var sid = row.cells[1];
+            var sgpa = row.cells[2];
+            if (sname == nameInputEl.value && sid == idInputEl.value && sgpa == gpaInputEl.value) {
+                sname = students[i].name;
+                sid = students[i].id
+                sgpa = students[i].gpa
+            }
 
-            showMessage3('success');
         }
     }
+    showMessage3('success');
 });
 
 function inputValidation(name, id, gpa) {
@@ -96,8 +106,10 @@ function insertStudent(name, id, gpa) {
         id: id,
         gpa: gpa,
     };
-    students.push(student);
-    console.log('students array: ', students);
+    if (name != NULL && id != NULL && gpa != NULL) {
+        students.push(student);
+        console.log('students array: ', students);
+    }
 }
 
 function showMessage(event) {
