@@ -17,7 +17,8 @@ td {
 }
 
 tr:nth-child(even) {
-    background-color: #cadff0;
+    background-color: #9DC88D;
+    color: black;
 }
 
 td {
@@ -35,13 +36,11 @@ tr {
 }
 
 body {
-    /*  background-image: url("duh.jpg"); */
     width: auto;
     height: 1280px;
     background-position: center;
     background-size: cover;
     font-family: san-serif;
-    /*    backdrop-filter: brightness(32%); */
 }
 
 .container {
@@ -75,28 +74,28 @@ button {
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-family: 'Roboto', sans-serif;
-    /*font-family: 'Nunito', sans-serif;*/
-    font-size: 14px;
-    padding: 2px 4px;
-    margin: 17px 11px 15px 11px;
+    /*   font-family: 'Roboto', sans-serif; */
+    font-family: 'Truculenta', sans-serif;
+    font-size: 16px;
+    padding: 1px 6px;
+    margin: 17px 11px 15px 12px;
     transition-duration: 0.4s;
     cursor: pointer;
 }
 
 button {
     background-color: white;
-    color: darkgray;
-    border: 2px solid lightblue;
+    color: rgb(122, 117, 117);
+    border: 2px solid #9DC88D;
 }
 
 button:hover {
-    background-color: lightblue;
+    background-color: #164A41;
     color: white;
 }
 
 input {
-    border-bottom: 1px solid rgb(216, 244, 253) !important;
+    border-bottom: 1px solid #9DC88D !important;
     width: 87%;
     background: trasparent;
     border: none;

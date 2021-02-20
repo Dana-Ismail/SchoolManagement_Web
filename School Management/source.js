@@ -6,22 +6,9 @@ document.getElementById('submit').addEventListener('click', (e) => {
     let nameInputEl = document.getElementById('name');
     let idInputEl = document.getElementById('idNumber');
     let gpaInputEl = document.getElementById('gpa');
-    // Validation for input
-    inputValidation(nameInputEl.value, idInputEl.value, gpaInputEl.value);
-    // insert student
-    insertStudent(nameInputEl.value, idInputEl.value, gpaInputEl.value);
 
-    // Show success message
-    showMessage('success');
+    inputValidation2(nameInputEl.value, idInputEl.value, gpaInputEl.value);
 
-    var table = document.getElementById("tbl");
-    var row = table.insertRow(1);
-    var Sname = row.insertCell(0);
-    var Sid = row.insertCell(1);
-    var Sgpa = row.insertCell(2);
-    Sid.innerHTML = idInputEl.value;
-    Sname.innerHTML = nameInputEl.value;
-    Sgpa.innerHTML = gpaInputEl.value;
 
 });
 
@@ -31,57 +18,94 @@ document.getElementById('delete').addEventListener('click', (e) => {
     let idInputEl = document.getElementById('idNumber');
     let gpaInputEl = document.getElementById('gpa');
     inputValidation(nameInputEl.value, idInputEl.value, gpaInputEl.value);
-    for (let i = 0, L = students.length; i < L; i++) {
-        if (students[i].name == nameInputEl.value && students[i].id == idInputEl.value && students[i].gpa == gpaInputEl.value) {
+    for (let i = 0; i < students.length; i++) {
+        if (students[i].id == idInputEl.value) {
+            DeleteRow(students[i].id);
             students.splice(i, 1);
+
             showMessage2('success');
-            /*  DeleteRow(nameInputEl.value, idInputEl.value, gpaInputEl.value); */
 
         }
     }
 
 });
 
-function DeleteRow(name, id, gpa) {
+function DeleteRow(id) {
     var table = document.getElementById("tbl");
     for (var i = 0; i < table.rows.length; i++) {
         var row = table.rows[i];
-        var sname = row.cells[0];
         var sid = row.cells[1];
-        var sgpa = row.cells[2];
-        if (sname == name && sid == id && sgpa == gpa) {
+        if (sid == id) {
             table.deleteRow(i);
-            rowsno--;
+
         }
     }
 }
-
 document.getElementById('update').addEventListener('click', (e) => {
     e.preventDefault();
+    alert('Enter the updated info');
     let nameInputEl = document.getElementById('name');
     let idInputEl = document.getElementById('idNumber');
     let gpaInputEl = document.getElementById('gpa');
-    inputValidation(nameInputEl.value, idInputEl.value, gpaInputEl.value);
-    for (let i = 0, L = students.length; i < L; i++) {
-        if (students[i].name == nameInputEl.value && students[i].id == idInputEl.value && students[i].gpa == gpaInputEl.value) {
+    var j = -99;
+    for (i = 0; i < students.length; i++) {
+        if (students[i].id == idInputEl.value)
+            j = i;
+    }
+    if (j != -99) {
+        students[j].name = nameInputEl.value;
+        students[j].id = idInputEl.value;
+        students[j].gpa = gpaInputEl.value;
+        var table = document.getElementById("tbl");
+        if (j == 0) {
+            DeleteRow(idInputEl.value);
+            var table = document.getElementById("tbl");
+            var row = table.insertRow(1);
+            var Sname = row.insertCell(0);
+            var Sid = row.insertCell(1);
+            var Sgpa = row.insertCell(2);
+            Sname.innerHTML = nameInputEl.value;
+            Sid.innerHTML = idInputEl.value;
+            Sgpa.innerHTML = gpaInputEl.value;
+        }
+        var row = table.rows[j];
+        var sname = row.cells[0];
+        var sid = row.cells[1];
+        var sgpa = row.cells[2];
+        sname.innerHTML = nameInputEl.value;
+        sid.innerHTML = idInputEl.value;
+        sgpa.innerHTML = gpaInputEl.value;
+
+        showMessage3('success');
+    } else {
+        showMessage3('x');
+    }
+});
+
+/* document.getElementById('update').addEventListener('click', (e) => {
+    e.preventDefault();
+    let idInputEl = document.getElementById('idNumber');
+    for (let i = 0; i < students.length; i++) {
+        if (students[i].id == idInputEl.value) {
             alert('Enter the new info');
-            students[i].name = document.getElementById('name');
-            students[i].id = document.getElementById('idNumber');
-            students[i].gpa = document.getElementById('gpa');
+
+            let nameInputEl = document.getElementById('name');
+            let gpaInputEl = document.getElementById('gpa');
+
+            students[i].name = nameInputEl.value;
+            students[i].id = idInputEl.value;
+            students[i].gpa = gpaInputEl.value;
+            /*  var table = document.getElementById("tbl");
             var row = table.rows[i];
             var sname = row.cells[0];
             var sid = row.cells[1];
             var sgpa = row.cells[2];
-            if (sname == nameInputEl.value && sid == idInputEl.value && sgpa == gpaInputEl.value) {
-                sname = students[i].name;
-                sid = students[i].id
-                sgpa = students[i].gpa
-            }
+
+
 
         }
     }
-    showMessage3('success');
-});
+}); */
 
 function inputValidation(name, id, gpa) {
     // check for the value of each element
@@ -89,15 +113,49 @@ function inputValidation(name, id, gpa) {
 
     if (name == '') {
         alert('Please insert the student name');
+        return;
     }
 
     if (id == '') {
         alert('Please insert the student id number');
+        return;
     }
 
     if (gpa == '') {
         alert('Please insert the student gpa');
+        return;
     }
+}
+
+function inputValidation2(name, id, gpa) {
+    // check for the value of each element
+    let x = 30;
+
+    if (name == '') {
+        alert('Please insert the student name');
+        return;
+    }
+
+    if (id == '') {
+        alert('Please insert the student id number');
+        return;
+    }
+
+    if (gpa == '') {
+        alert('Please insert the student gpa');
+        return;
+    }
+
+    insertStudent(name, id, gpa);
+    showMessage('success');
+    var table = document.getElementById("tbl");
+    var row = table.insertRow(1);
+    var Sname = row.insertCell(0);
+    var Sid = row.insertCell(1);
+    var Sgpa = row.insertCell(2);
+    Sid.innerHTML = id;
+    Sname.innerHTML = name;
+    Sgpa.innerHTML = gpa;
 }
 
 function insertStudent(name, id, gpa) {
@@ -106,10 +164,9 @@ function insertStudent(name, id, gpa) {
         id: id,
         gpa: gpa,
     };
-    if (name != NULL && id != NULL && gpa != NULL) {
-        students.push(student);
-        console.log('students array: ', students);
-    }
+
+    students.push(student);
+    console.log('students array: ', students);
 }
 
 function showMessage(event) {
